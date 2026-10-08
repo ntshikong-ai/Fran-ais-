@@ -1,0 +1,2080 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>PRÉPA EXCELLENTIA — TEST BLANC FRANÇAIS</title>
+
+<style>
+:root{
+ --navy:#0b1736;
+ --blue:#2563eb;
+ --violet:#7c3aed;
+ --green:#10b981;
+ --red:#dc2626;
+ --orange:#f59e0b;
+ --bg:#f4f7fb;
+ --white:#fff;
+ --text:#172033;
+ --muted:#64748b;
+ --border:#e2e8f0;
+}
+
+*{box-sizing:border-box}
+
+body{
+ margin:0;
+ font-family:Arial,Helvetica,sans-serif;
+ background:var(--bg);
+ color:var(--text);
+}
+
+header{
+ background:linear-gradient(135deg,#0b1736,#172554,#312e81);
+ color:white;
+ padding:18px 20px;
+ position:sticky;
+ top:0;
+ z-index:20;
+ box-shadow:0 4px 15px rgba(0,0,0,.15);
+}
+
+.header-inner{
+ max-width:1000px;
+ margin:auto;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:15px;
+}
+
+.brand{
+ font-weight:900;
+ font-size:18px;
+}
+
+.brand small{
+ display:block;
+ opacity:.7;
+ font-size:11px;
+ margin-top:3px;
+}
+
+.timer{
+ background:rgba(255,255,255,.12);
+ border:1px solid rgba(255,255,255,.2);
+ padding:9px 14px;
+ border-radius:12px;
+ font-weight:bold;
+ white-space:nowrap;
+}
+
+.container{
+ max-width:1000px;
+ margin:auto;
+ padding:25px 15px 50px;
+}
+
+.card{
+ background:white;
+ border:1px solid var(--border);
+ border-radius:18px;
+ padding:25px;
+ margin-bottom:20px;
+ box-shadow:0 8px 25px rgba(15,23,42,.06);
+}
+
+.home{
+ text-align:center;
+ padding:40px 25px;
+}
+
+.home h1{
+ color:var(--navy);
+ font-size:32px;
+ margin-bottom:8px;
+}
+
+.home p{
+ color:var(--muted);
+ line-height:1.6;
+}
+
+input[type="text"]{
+ width:100%;
+ max-width:600px;
+ padding:15px;
+ border:2px solid var(--border);
+ border-radius:12px;
+ font-size:16px;
+ margin:15px auto;
+ display:block;
+ outline:none;
+}
+
+input[type="text"]:focus{
+ border-color:var(--blue);
+}
+
+button{
+ border:0;
+ border-radius:12px;
+ padding:13px 20px;
+ font-size:15px;
+ font-weight:bold;
+ cursor:pointer;
+}
+
+.primary{
+ background:linear-gradient(135deg,var(--blue),var(--violet));
+ color:white;
+}
+
+.secondary{
+ background:#eef2ff;
+ color:#3730a3;
+}
+
+.danger{
+ background:#fee2e2;
+ color:#991b1b;
+}
+
+.progress-wrap{
+ background:#e2e8f0;
+ height:9px;
+ border-radius:20px;
+ overflow:hidden;
+ margin:10px 0 20px;
+}
+
+.progress{
+ height:100%;
+ width:0%;
+ background:linear-gradient(90deg,var(--blue),var(--violet),var(--green));
+ transition:.3s;
+}
+
+.question-number{
+ color:var(--blue);
+ font-weight:bold;
+ margin-bottom:10px;
+}
+
+.question{
+ font-size:20px;
+ font-weight:bold;
+ line-height:1.5;
+ margin-bottom:20px;
+}
+
+.option{
+ display:block;
+ width:100%;
+ text-align:left;
+ background:#fff;
+ border:2px solid var(--border);
+ padding:15px;
+ margin:10px 0;
+ border-radius:12px;
+ transition:.2s;
+ color:var(--text);
+}
+
+.option:hover{
+ border-color:#93c5fd;
+ background:#eff6ff;
+}
+
+.option.selected{
+ border-color:var(--blue);
+ background:#eff6ff;
+}
+
+.option.correct{
+ border-color:var(--green);
+ background:#ecfdf5;
+}
+
+.option.wrong{
+ border-color:var(--red);
+ background:#fef2f2;
+}
+
+.nav{
+ display:flex;
+ justify-content:space-between;
+ gap:10px;
+ margin-top:20px;
+}
+
+.reading{
+ line-height:1.85;
+ font-size:17px;
+ text-align:justify;
+}
+
+.reading h2{
+ color:var(--navy);
+}
+
+.reading p{
+ margin-bottom:18px;
+}
+
+.reading-box{
+ max-height:65vh;
+ overflow-y:auto;
+ padding-right:8px;
+}
+
+.reading-timer{
+ text-align:center;
+ font-size:32px;
+ font-weight:900;
+ color:var(--violet);
+ margin:15px;
+}
+
+.badge{
+ display:inline-block;
+ padding:6px 10px;
+ border-radius:20px;
+ background:#eef2ff;
+ color:#3730a3;
+ font-size:12px;
+ font-weight:bold;
+}
+
+.result-score{
+ font-size:45px;
+ font-weight:900;
+ color:var(--blue);
+ text-align:center;
+}
+
+.result-grid{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:12px;
+}
+
+.result-box{
+ background:#f8fafc;
+ border:1px solid var(--border);
+ border-radius:12px;
+ padding:15px;
+ text-align:center;
+}
+
+.error{
+ border-left:5px solid var(--red);
+ background:#fff7f7;
+ padding:15px;
+ border-radius:10px;
+ margin:12px 0;
+}
+
+.error strong{
+ display:block;
+ margin-bottom:7px;
+}
+
+.explanation{
+ color:#475569;
+ line-height:1.5;
+ margin-top:7px;
+}
+
+.hidden{
+ display:none!important;
+}
+
+.modal{
+ position:fixed;
+ inset:0;
+ background:rgba(2,6,23,.75);
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ padding:15px;
+ z-index:100;
+}
+
+.modal-box{
+ background:white;
+ border-radius:18px;
+ max-width:850px;
+ max-height:85vh;
+ overflow:auto;
+ padding:25px;
+}
+
+.warning{
+ color:var(--red);
+ font-weight:bold;
+}
+
+footer{
+ text-align:center;
+ color:var(--muted);
+ padding:25px;
+ font-size:13px;
+}
+
+@media(max-width:650px){
+ .header-inner{
+  flex-direction:column;
+  align-items:flex-start;
+ }
+ .home h1{font-size:25px}
+ .card{padding:18px}
+ .question{font-size:18px}
+ .result-grid{grid-template-columns:1fr}
+ .nav{flex-direction:column}
+ .nav button{width:100%}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+ <div class="header-inner">
+  <div class="brand">
+   PRÉPA EXCELLENTIA WANTANSHI
+   <small>TEST BLANC — FRANÇAIS — NATHAN</small>
+  </div>
+  <div class="timer" id="globalTimer">00:00:00</div>
+ </div>
+</header>
+
+<div class="container">
+
+<!-- ACCUEIL -->
+<section id="home" class="card home">
+ <span class="badge">100 QUESTIONS • FRANÇAIS</span>
+ <h1>TEST BLANC EXCELLENTIA</h1>
+ <p>
+  Évaluation complète de français — niveau moyen à avancé.<br>
+  Compréhension, grammaire, conjugaison, accords, vocabulaire,
+  littérature et expression écrite.
+ </p>
+
+ <input id="candidateName" type="text"
+        placeholder="Entre ton nom complet">
+
+ <button class="primary" onclick="startTest()">
+  COMMENCER LE TEST
+ </button>
+
+ <p>
+  ⏱️ 1 minute par question<br>
+  📖 Une longue phase de lecture est prévue avant les questions de compréhension.
+ </p>
+</section>
+
+<!-- LECTURE -->
+<section id="readingScreen" class="card hidden">
+
+ <div class="badge">LECTURE — COMPRÉHENSION</div>
+
+ <h1 id="readingTitle"></h1>
+
+ <div class="reading-timer" id="readingTimer">15:00</div>
+
+ <div class="reading-box reading" id="readingText"></div>
+
+ <div class="nav">
+  <button class="secondary" onclick="skipReading()">
+   Passer directement aux questions
+  </button>
+
+  <button class="primary" onclick="continueReading()">
+   Commencer les questions
+  </button>
+ </div>
+
+</section>
+
+<!-- QUESTIONS -->
+<section id="quizScreen" class="hidden">
+
+ <div class="card">
+  <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap">
+   <span id="sectionBadge" class="badge">FRANÇAIS</span>
+   <strong id="questionTimer">01:00</strong>
+  </div>
+
+  <div class="progress-wrap">
+   <div class="progress" id="progressBar"></div>
+  </div>
+
+  <div class="question-number" id="questionNumber"></div>
+  <div class="question" id="questionText"></div>
+  <div id="options"></div>
+
+  <div class="nav">
+   <button class="secondary" id="textButton" onclick="openReading()">
+    📖 Revoir le texte
+   </button>
+
+   <button class="primary" onclick="nextQuestion()">
+    Question suivante →
+   </button>
+  </div>
+ </div>
+
+</section>
+
+<!-- RESULTATS -->
+<section id="resultScreen" class="hidden">
+
+ <div class="card">
+  <div class="badge">RÉSULTATS</div>
+  <h1 id="resultTitle"></h1>
+
+  <div class="result-score" id="resultScore"></div>
+
+  <p style="text-align:center" id="resultTime"></p>
+
+  <div class="result-grid">
+   <div class="result-box">
+    <strong>Bonnes réponses</strong>
+    <div id="goodCount"></div>
+   </div>
+
+   <div class="result-box">
+    <strong>Mauvaises réponses</strong>
+    <div id="badCount"></div>
+   </div>
+
+   <div class="result-box">
+    <strong>Non répondues</strong>
+    <div id="emptyCount"></div>
+   </div>
+
+   <div class="result-box">
+    <strong>Pourcentage</strong>
+    <div id="percent"></div>
+   </div>
+  </div>
+ </div>
+
+ <div class="card">
+  <h2>Résultats par chapitre</h2>
+  <div id="chapterResults"></div>
+ </div>
+
+ <div class="card">
+  <h2>Correction détaillée</h2>
+  <div id="errors"></div>
+ </div>
+
+</section>
+
+</div>
+
+<footer>
+ PRÉPA EXCELLENTIA WANTANSHI • TEST FRANÇAIS • by Nathan
+</footer>
+
+<div id="readingModal" class="modal hidden">
+ <div class="modal-box">
+  <h2>📖 Texte de compréhension</h2>
+  <div class="reading" id="modalText"></div>
+  <button class="primary" onclick="closeReading()">
+   Fermer
+  </button>
+ </div>
+</div>
+
+<script>
+
+/* =========================================================
+   TEXTE LONG
+========================================================= */
+
+const readingTitle =
+"LA MÉMOIRE DES PIERRES";
+
+const readingText = `
+<p>
+Dans une ville ancienne située au bord d’un grand fleuve,
+les habitants avaient depuis longtemps appris à vivre avec les
+transformations du temps. Les maisons modernes s’élevaient
+désormais autour de quelques bâtiments anciens, les rues
+étaient devenues plus bruyantes et les commerces avaient
+remplacé certaines petites échoppes qui existaient autrefois.
+Pourtant, au cœur du vieux quartier, une construction résistait
+encore aux changements : une ancienne bibliothèque municipale
+dont les murs semblaient porter la mémoire de plusieurs générations.
+</p>
+
+<p>
+Le bâtiment avait été construit plusieurs décennies auparavant
+par un architecte dont le nom n’apparaissait presque plus dans
+les documents officiels. Ses fenêtres hautes laissaient entrer
+une lumière douce, particulièrement agréable dans l’après-midi.
+À l’intérieur, de longues étagères en bois supportaient des
+centaines de livres. Certains étaient récents, d’autres avaient
+jauni avec les années. On pouvait y trouver des romans, des
+ouvrages historiques, des dictionnaires, des recueils de poésie,
+des cartes anciennes et même quelques journaux conservés avec
+un soin presque cérémoniel.
+</p>
+
+<p>
+La responsable de la bibliothèque s’appelait Madeleine. Elle
+avait consacré une grande partie de sa vie à cet endroit. Elle
+connaissait presque chaque rayon, chaque table et même certains
+bruits particuliers du bâtiment. Elle savait reconnaître le
+grincement d’une porte, le claquement d’une fenêtre mal fermée
+et le léger craquement du parquet situé près de la salle des
+archives. Pour elle, la bibliothèque n’était pas simplement un
+lieu où l’on venait chercher des livres. C’était un espace dans
+lequel les générations successives avaient laissé une trace.
+</p>
+
+<p>
+Un matin, alors qu’elle classait de vieux documents, Madeleine
+découvrit une enveloppe cachée derrière une rangée de livres.
+Elle était couverte de poussière et portait une date ancienne.
+L’écriture, fine et régulière, semblait avoir été réalisée avec
+une plume. Curieuse, Madeleine ouvrit délicatement l’enveloppe.
+Elle y trouva plusieurs feuilles ainsi qu’une photographie en
+noir et blanc représentant un groupe de jeunes personnes devant
+la bibliothèque.
+</p>
+
+<p>
+Au dos de la photographie figurait une phrase mystérieuse :
+« Ce que nous construisons aujourd’hui appartiendra demain à
+ceux qui sauront regarder. » Madeleine relut plusieurs fois
+cette phrase. Elle ne savait pas qui l’avait écrite ni pourquoi
+la photographie avait été dissimulée derrière les livres.
+Cependant, elle remarqua que l’un des jeunes hommes représentés
+sur la photographie ressemblait étonnamment à une personne dont
+elle avait souvent entendu parler dans sa famille.
+</p>
+
+<p>
+Elle décida alors de consulter les archives municipales.
+Pendant plusieurs jours, elle parcourut des registres, des
+lettres et d’anciens comptes rendus. La recherche était lente,
+car certains documents étaient fragiles et difficiles à lire.
+Elle finit pourtant par découvrir le nom du jeune homme :
+Émile Kanza, un instituteur qui avait participé à la création
+d’un cercle de lecture dans le quartier.
+</p>
+
+<p>
+À cette époque, les livres étaient difficiles à obtenir pour
+une grande partie de la population. Le cercle de lecture avait
+donc été créé afin que les habitants puissent partager leurs
+ouvrages. Chacun apportait ce qu’il possédait. Les personnes
+qui savaient lire racontaient parfois les histoires à celles
+qui ne le pouvaient pas encore. Les réunions étaient modestes,
+mais elles avaient progressivement attiré des commerçants,
+des artisans, des élèves, des ouvriers et même quelques
+fonctionnaires.
+</p>
+
+<p>
+Madeleine comprit alors que la photographie n’était pas
+seulement un souvenir familial. Elle témoignait d’une époque
+où quelques individus avaient décidé de faire de la lecture
+un instrument de rapprochement. Le projet n’avait rien de
+spectaculaire. Il n’avait pas commencé par de grandes
+cérémonies ni par des discours célèbres. Il était né d’une
+conviction simple : une communauté qui partage ses connaissances
+peut mieux comprendre son propre passé et préparer son avenir.
+</p>
+
+<p>
+En poursuivant ses recherches, Madeleine découvrit une seconde
+lettre. Celle-ci avait été écrite par Émile plusieurs années
+après la création du cercle. Il y expliquait que les livres
+n’étaient pas seulement des objets contenant des informations.
+Selon lui, ils permettaient aux individus de rencontrer des
+pensées qu’ils n’auraient peut-être jamais découvertes seuls.
+Un livre pouvait ouvrir une fenêtre sur une autre époque,
+présenter une société différente ou obliger un lecteur à
+remettre en question une opinion qu’il croyait définitive.
+</p>
+
+<p>
+Cette idée impressionna particulièrement Madeleine. Elle
+comprit que la bibliothèque actuelle était, en quelque sorte,
+la continuation de cette initiative ancienne. Les lecteurs
+avaient changé, les ouvrages s’étaient multipliés et les
+technologies avaient transformé la manière de consulter
+l’information, mais la nécessité de transmettre les connaissances
+demeurait la même.
+</p>
+
+<p>
+Quelques semaines plus tard, la municipalité annonça qu’elle
+envisageait de rénover le vieux bâtiment. Certains responsables
+souhaitaient transformer une partie des locaux en bureaux
+administratifs. D’autres estimaient que la bibliothèque
+occupait trop d’espace dans un quartier devenu très fréquenté.
+Madeleine ne s’opposa pas au changement par principe. Elle
+craignait seulement que la rénovation fasse disparaître ce
+qui donnait au lieu son caractère particulier.
+</p>
+
+<p>
+Elle organisa alors une exposition. Dans les vitrines, elle
+présenta la photographie retrouvée, les anciennes lettres,
+des livres datant de plusieurs décennies et quelques objets
+ayant appartenu aux premiers membres du cercle de lecture.
+Elle invita les habitants à venir raconter leurs propres
+souvenirs. Certains apportèrent des photographies de leurs
+parents, d’autres des cahiers scolaires, des carnets ou des
+lettres anciennes.
+</p>
+
+<p>
+L’exposition connut un succès inattendu. Des personnes qui ne
+fréquentaient presque jamais la bibliothèque vinrent découvrir
+son histoire. Plusieurs habitants comprirent qu’ils possédaient
+eux aussi une partie de la mémoire du quartier. Une vieille
+femme apporta même un carnet dans lequel son père avait noté
+les titres des premiers livres prêtés par le cercle de lecture.
+</p>
+
+<p>
+Peu à peu, l’idée de rénover la bibliothèque changea de sens.
+Il ne s’agissait plus simplement de moderniser un bâtiment.
+Il fallait trouver un équilibre entre le présent et le passé.
+Les travaux furent donc réorganisés afin de conserver certains
+éléments architecturaux, notamment les grandes fenêtres, les
+étagères anciennes et la salle des archives.
+</p>
+
+<p>
+Lorsque les travaux furent terminés, la bibliothèque était
+plus lumineuse et mieux adaptée aux besoins modernes. Elle
+possédait désormais des espaces numériques, une salle de
+conférence et une section destinée aux enfants. Pourtant,
+l’ancien parquet avait été conservé et la photographie
+d’Émile Kanza occupait une place particulière près de
+l’entrée.
+</p>
+
+<p>
+Lors de la réouverture, Madeleine prononça quelques mots.
+Elle expliqua que conserver la mémoire ne signifiait pas
+refuser le changement. Au contraire, disait-elle, connaître
+ce qui a été fait auparavant permet parfois de construire
+l’avenir avec davantage de lucidité. Une société qui oublie
+trop rapidement son histoire risque de répéter certaines
+erreurs ; une société qui refuse toute nouveauté risque, elle,
+de rester prisonnière de son passé.
+</p>
+
+<p>
+À la fin de la cérémonie, un enfant demanda à Madeleine si
+Émile Kanza avait réellement imaginé que sa photographie serait
+encore regardée plusieurs décennies plus tard. Elle sourit et
+répondit qu’elle n’en savait rien. Mais elle ajouta que certaines
+actions dépassent la volonté de ceux qui les accomplissent.
+Une idée née dans une petite salle peut voyager très loin,
+parfois bien plus longtemps que son auteur ne l’aurait imaginé.
+</p>
+
+<p>
+Ce soir-là, lorsque les portes de la bibliothèque se refermèrent,
+Madeleine resta quelques minutes seule dans la grande salle.
+Le silence avait remplacé le bruit de la cérémonie. Elle
+regarda les rayonnages, les fenêtres et la photographie.
+Elle pensa alors que les bâtiments ne parlent pas vraiment,
+mais que les traces qu’ils conservent peuvent raconter des
+histoires à ceux qui prennent le temps de les écouter.
+</p>
+`;
+
+
+/* =========================================================
+   QUESTIONS
+========================================================= */
+
+const Q = [
+
+/* ================= COMPRÉHENSION 1-20 ================= */
+
+{
+c:"Compréhension de texte",
+q:"Pourquoi la bibliothèque était-elle importante pour Madeleine ?",
+o:[
+"Parce qu'elle était la plus grande bibliothèque de la ville",
+"Parce qu'elle représentait la mémoire de plusieurs générations",
+"Parce qu'elle appartenait à sa famille",
+"Parce qu'elle contenait uniquement des livres anciens"
+],a:1,e:"Le texte explique que Madeleine considérait la bibliothèque comme un lieu où plusieurs générations avaient laissé une trace."
+},
+
+{
+c:"Compréhension de texte",
+q:"Où Madeleine découvre-t-elle l'enveloppe ?",
+o:[
+"Dans la salle de conférence",
+"Dans son bureau",
+"Derrière une rangée de livres",
+"Dans la rue"
+],a:2,e:"L'enveloppe était cachée derrière une rangée de livres."
+},
+
+{
+c:"Compréhension de texte",
+q:"Que contenait l'enveloppe ?",
+o:[
+"Un livre et une carte",
+"Des feuilles et une photographie",
+"De l'argent et une lettre",
+"Une clé et un carnet"
+],a:1,e:"Le texte précise que Madeleine trouve plusieurs feuilles et une photographie en noir et blanc."
+},
+
+{
+c:"Compréhension de texte",
+q:"Que représentait la photographie ?",
+o:[
+"Un groupe de jeunes personnes devant la bibliothèque",
+"Une cérémonie officielle",
+"Une classe d'élèves",
+"Une famille réunie"
+],a:0,e:"La photographie représentait un groupe de jeunes devant la bibliothèque."
+},
+
+{
+c:"Compréhension de texte",
+q:"Quelle phrase était inscrite au dos de la photographie ?",
+o:[
+"Le savoir appartient seulement aux savants.",
+"Les livres sont les miroirs du monde.",
+"Ce que nous construisons aujourd'hui appartiendra demain à ceux qui sauront regarder.",
+"Le passé doit toujours remplacer le présent."
+],a:2,e:"C'est précisément la phrase retrouvée au dos de la photographie."
+},
+
+{
+c:"Compréhension de texte",
+q:"Qui était Émile Kanza ?",
+o:[
+"Un architecte",
+"Un instituteur",
+"Un commerçant",
+"Un responsable municipal"
+],a:1,e:"Les archives permettent à Madeleine de découvrir qu'Émile Kanza était un instituteur."
+},
+
+{
+c:"Compréhension de texte",
+q:"Pourquoi le cercle de lecture avait-il été créé ?",
+o:[
+"Pour vendre des livres",
+"Pour former des écrivains",
+"Pour permettre aux habitants de partager leurs ouvrages",
+"Pour remplacer les écoles"
+],a:2,e:"Le cercle permettait aux habitants de partager les livres qu'ils possédaient."
+},
+
+{
+c:"Compréhension de texte",
+q:"Quelle idée Émile défendait-il dans sa lettre ?",
+o:[
+"Les livres sont uniquement des objets anciens.",
+"Les livres permettent de découvrir d'autres pensées et de remettre en question ses opinions.",
+"Les livres doivent être réservés aux enfants.",
+"Les livres empêchent le progrès."
+],a:1,e:"La lettre explique que les livres ouvrent sur d'autres époques et idées et peuvent remettre en question nos opinions."
+},
+
+{
+c:"Compréhension de texte",
+q:"Pourquoi Madeleine organise-t-elle une exposition ?",
+o:[
+"Pour vendre la bibliothèque",
+"Pour montrer la valeur historique du lieu",
+"Pour collecter de l'argent pour une école",
+"Pour présenter uniquement des livres numériques"
+],a:1,e:"L'exposition permettait de présenter la mémoire de la bibliothèque et du quartier."
+},
+
+{
+c:"Compréhension de texte",
+q:"Quel fut l'effet de l'exposition ?",
+o:[
+"Elle fut ignorée par les habitants.",
+"Elle provoqua la fermeture de la bibliothèque.",
+"Elle attira de nombreuses personnes et fit apparaître d'autres souvenirs du quartier.",
+"Elle détruisit les anciennes archives."
+],a:2,e:"L'exposition connut un succès inattendu et les habitants apportèrent leurs propres souvenirs."
+},
+
+{
+c:"Compréhension de texte",
+q:"Pourquoi certains responsables voulaient-ils modifier la bibliothèque ?",
+o:[
+"Parce qu'elle était trop moderne",
+"Parce qu'elle occupait trop d'espace dans un quartier devenu très fréquenté",
+"Parce qu'elle n'avait plus de livres",
+"Parce que Madeleine voulait partir"
+],a:1,e:"Le texte précise que certains responsables estimaient que la bibliothèque occupait trop d'espace."
+},
+
+{
+c:"Compréhension de texte",
+q:"Quelle solution fut finalement adoptée ?",
+o:[
+"Supprimer complètement la bibliothèque",
+"Construire une nouvelle bibliothèque ailleurs",
+"Moderniser le bâtiment tout en conservant certains éléments anciens",
+"Transformer tout le bâtiment en musée"
+],a:2,e:"La rénovation a concilié modernité et conservation des éléments historiques."
+},
+
+{
+c:"Compréhension de texte",
+q:"Quel élément architectural fut conservé ?",
+o:[
+"Le toit uniquement",
+"Les grandes fenêtres",
+"Les murs extérieurs seulement",
+"Les portes métalliques"
+],a:1,e:"Les grandes fenêtres, les anciennes étagères et la salle des archives furent notamment conservées."
+},
+
+{
+c:"Compréhension de texte",
+q:"Que signifie l'idée selon laquelle conserver la mémoire ne signifie pas refuser le changement ?",
+o:[
+"Il faut toujours supprimer le passé.",
+"Il faut choisir entre passé et avenir.",
+"On peut respecter le passé tout en construisant quelque chose de nouveau.",
+"Le changement est inutile."
+],a:2,e:"Madeleine défend un équilibre entre la mémoire du passé et les besoins du présent."
+},
+
+{
+c:"Compréhension de texte",
+q:"Que symbolise principalement la photographie d'Émile Kanza ?",
+o:[
+"Une ancienne compétition sportive",
+"Une initiative collective autour de la lecture",
+"Une cérémonie politique",
+"Une réunion familiale"
+],a:1,e:"La photographie témoigne de l'ancien cercle de lecture et de son rôle collectif."
+},
+
+{
+c:"Compréhension de texte",
+q:"Pourquoi le texte insiste-t-il sur le fait que les livres permettent de rencontrer d'autres pensées ?",
+o:[
+"Pour montrer que la lecture peut élargir la réflexion.",
+"Pour prouver que les livres sont toujours anciens.",
+"Pour expliquer pourquoi les livres sont chers.",
+"Pour montrer que la technologie est inutile."
+],a:0,e:"Le texte présente la lecture comme un moyen d'élargir sa compréhension du monde."
+},
+
+{
+c:"Compréhension de texte",
+q:"Quel est le thème principal du texte ?",
+o:[
+"La disparition des villes anciennes",
+"La mémoire collective et la transmission des connaissances",
+"Les difficultés des architectes",
+"Le commerce des livres"
+],a:1,e:"Le récit associe mémoire, transmission, lecture et évolution de la communauté."
+},
+
+{
+c:"Compréhension de texte",
+q:"Quelle opposition structure principalement le discours de Madeleine ?",
+o:[
+"Richesse et pauvreté",
+"Jeunesse et vieillesse",
+"Passé et avenir",
+"Ville et campagne"
+],a:2,e:"Madeleine explique qu'il faut trouver un équilibre entre le passé et l'avenir."
+},
+
+{
+c:"Compréhension de texte",
+q:"Que comprend Madeleine grâce à ses recherches ?",
+o:[
+"Que la bibliothèque avait été construite récemment.",
+"Que la photographie faisait partie d'une histoire collective plus large.",
+"Qu'Émile avait détruit les archives.",
+"Que les habitants ne lisaient jamais."
+],a:1,e:"Elle comprend que la photographie témoignait d'une initiative collective et pas seulement d'un souvenir familial."
+},
+
+{
+c:"Compréhension de texte",
+q:"Quelle idée clôt symboliquement le récit ?",
+o:[
+"Les bâtiments modernes sont toujours meilleurs.",
+"Les traces du passé peuvent raconter des histoires à ceux qui savent les écouter.",
+"Les livres ne servent plus aujourd'hui.",
+"Les archives doivent être détruites."
+],a:1,e:"La dernière phrase insiste sur les traces conservées par les bâtiments et leur capacité à raconter l'histoire.", 
+},
+
+/* ================= GRAMMAIRE 21-35 ================= */
+
+{
+c:"Grammaire",
+q:"Dans « Les habitants respectent leur patrimoine », quelle est la fonction de « leur patrimoine » ?",
+o:["Sujet","COD","COI","Attribut du sujet"],a:1,e:"Ils respectent quoi ? Leur patrimoine : c'est le COD."
+},
+
+{
+c:"Grammaire",
+q:"Dans « Madeleine parle aux habitants », « aux habitants » est :",
+o:["COD","COI","Sujet","Attribut"],a:1,e:"Le verbe parler se construit ici avec la préposition « à » : COI."
+},
+
+{
+c:"Grammaire",
+q:"Dans « La bibliothèque reste silencieuse », « silencieuse » est :",
+o:["COD","COI","Attribut du sujet","Complément circonstanciel"],a:2,e:"Après le verbe d'état « rester », silencieuse est attribut du sujet."
+},
+
+{
+c:"Grammaire",
+q:"Quelle phrase contient un complément circonstanciel de temps ?",
+o:["Il lit dans la bibliothèque.","Il lit attentivement.","Il lit demain.","Il lit un roman."],
+a:2,e:"« Demain » indique le moment de l'action."
+},
+
+{
+c:"Grammaire",
+q:"Dans « Le livre que j'ai retrouvé est ancien », « que » est :",
+o:["Pronom personnel","Pronom relatif","Déterminant","Adverbe"],a:1,e:"« Que » introduit la proposition relative."
+},
+
+{
+c:"Grammaire",
+q:"Quelle phrase contient une proposition subordonnée circonstancielle de cause ?",
+o:[
+"Je lis parce que le texte m'intéresse.",
+"Je lis lorsque je peux.",
+"Je lis afin de progresser.",
+"Je lis quiétement."
+],a:0,e:"« Parce que » introduit une cause."
+},
+
+{
+c:"Grammaire",
+q:"Quelle phrase contient une subordonnée de but ?",
+o:[
+"Il travaille parce qu'il doit réussir.",
+"Il travaille lorsqu'il rentre.",
+"Il travaille afin qu'il puisse réussir.",
+"Il travaille puisqu'il est motivé."
+],a:2,e:"« Afin que » introduit une proposition exprimant le but."
+},
+
+{
+c:"Grammaire",
+q:"Dans « Bien qu'il soit fatigué, il continue », quelle relation est exprimée ?",
+o:["Cause","But","Concession","Conséquence"],a:2,e:"« Bien que » introduit une concession."
+},
+
+{
+c:"Grammaire",
+q:"Quelle phrase est correctement construite ?",
+o:[
+"Malgré qu'il pleut, il sort.",
+"Bien qu'il est fatigué, il travaille.",
+"Bien qu'il soit fatigué, il travaille.",
+"Parce que étant malade, il reste."
+],a:2,e:"Après « bien que », on emploie normalement le subjonctif : « soit »."
+},
+
+{
+c:"Grammaire",
+q:"Dans « C'est une décision importante », « importante » est :",
+o:["Épithète","COD","COI","Sujet"],a:0,e:"L'adjectif « importante » qualifie directement le nom « décision »."
+},
+
+{
+c:"Grammaire",
+q:"Dans « Il devient attentif », « attentif » est :",
+o:["Épithète","Attribut du sujet","COD","Complément du nom"],a:1,e:"« devenir » est un verbe d'état ; « attentif » est attribut du sujet."
+},
+
+{
+c:"Grammaire",
+q:"Quelle phrase est à la forme négative ?",
+o:[
+"Personne n'est venu.",
+"Tout le monde est venu.",
+"Quelqu'un est venu.",
+"Il est venu."
+],a:0,e:"La structure « personne ne » exprime la négation."
+},
+
+{
+c:"Grammaire",
+q:"Dans « Je ne lis jamais ce livre », « jamais » est :",
+o:["Déterminant","Adverbe","Adjectif","Pronom"],a:1,e:"« Jamais » est un adverbe de négation."
+},
+
+{
+c:"Grammaire",
+q:"Quelle phrase contient un déterminant démonstratif ?",
+o:["Cette histoire est intéressante.","Notre histoire est intéressante.","Une histoire est intéressante.","Mon histoire est intéressante."],
+a:0,e:"« Cette » est un déterminant démonstratif."
+},
+
+{
+c:"Grammaire",
+q:"Dans « Plusieurs lecteurs sont venus », « plusieurs » est :",
+o:["Déterminant indéfini","Pronom personnel","Adverbe","Conjonction"],a:0,e:"« Plusieurs » détermine le nom « lecteurs » : c'est un déterminant indéfini."
+},
+
+/* ================= CONJUGAISON 36-50 ================= */
+
+{
+c:"Conjugaison",
+q:"Si j'avais plus de temps, je ___ davantage.",
+o:["lis","lirai","lirais","avais lu"],a:2,e:"Condition irréelle au présent : imparfait dans la condition, conditionnel présent dans la conséquence."
+},
+
+{
+c:"Conjugaison",
+q:"Il faut que tu ___ ce texte attentivement.",
+o:["lis","lises","liras","lisais"],a:1,e:"Après « il faut que », on emploie le subjonctif : que tu lises."
+},
+
+{
+c:"Conjugaison",
+q:"Quand il arriva, nous ___ déjà.",
+o:["partons","étions partis","sommes partis","partirons"],a:1,e:"L'action de partir est antérieure à son arrivée : plus-que-parfait."
+},
+
+{
+c:"Conjugaison",
+q:"Demain, nous ___ le résultat.",
+o:["connaîtrons","connaissions","avions connu","connaîtrions"],a:0,e:"« Demain » indique ici le futur simple."
+},
+
+{
+c:"Conjugaison",
+q:"Si tu travaillais davantage, tu ___ de meilleurs résultats.",
+o:["obtiendras","obtiendrais","obtiens","avais obtenu"],a:1,e:"Imparfait + conditionnel présent."
+},
+
+{
+c:"Conjugaison",
+q:"Ils ___ depuis deux heures lorsqu'elle est arrivée.",
+o:["travaillaient","avaient travaillé","auront travaillé","travailleront"],a:0,e:"L'imparfait exprime une action en cours au moment d'une autre action passée."
+},
+
+{
+c:"Conjugaison",
+q:"Lorsque tu arriveras, j'___ déjà terminé.",
+o:["aurai","avais","ai","aurais"],a:0,e:"Futur antérieur : « j'aurai terminé »."
+},
+
+{
+c:"Conjugaison",
+q:"Je souhaite que vous ___ à l'heure.",
+o:["venez","viendrez","veniez","êtes venus"],a:2,e:"« Je souhaite que » appelle le subjonctif : que vous veniez."
+},
+
+{
+c:"Conjugaison",
+q:"Il aurait réussi s'il ___ davantage.",
+o:["travaille","travaillait","avait travaillé","travaillera"],a:2,e:"Condition passée : plus-que-parfait après « si »."
+},
+
+{
+c:"Conjugaison",
+q:"Nous ___ ce livre la semaine dernière.",
+o:["lirons","avons lu","lisions","lirions"],a:1,e:"« La semaine dernière » renvoie à une action passée achevée : passé composé."
+},
+
+{
+c:"Conjugaison",
+q:"Quand j'étais enfant, je ___ beaucoup.",
+o:["lisais","lirai","ai lu","aurai lu"],a:0,e:"Habitude dans le passé : imparfait."
+},
+
+{
+c:"Conjugaison",
+q:"Il ___ son travail avant de sortir.",
+o:["avait terminé","terminera","termine","terminerait"],a:0,e:"L'action de terminer est antérieure à celle de sortir : plus-que-parfait."
+},
+
+{
+c:"Conjugaison",
+q:"Dans « Ayant terminé son travail, il sortit », « ayant terminé » est :",
+o:["Participe présent","Participe passé seul","Gérondif","Participe présent composé"],a:3,e:"« Ayant terminé » est un participe présent composé."
+},
+
+{
+c:"Conjugaison",
+q:"Dans « En lisant, elle prend des notes », « en lisant » est :",
+o:["Infinitif","Gérondif","Participe passé","Subjonctif"],a:1,e:"Le gérondif se forme avec « en » + participe présent."
+},
+
+{
+c:"Conjugaison",
+q:"Quelle forme est correcte ?",
+o:["Nous eûmes fini avant midi.","Nous eûmes finis avant midi.","Nous eussions finis avant midi.","Nous avions finîmes avant midi."],
+a:0,e:"« Nous eûmes fini » est le passé antérieur correctement formé."
+},
+
+/* ================= ACCORDS / PARTICIPE PASSÉ 51-62 ================= */
+
+{
+c:"Accords / participe passé",
+q:"Les lettres qu'elle a ___ sont anciennes.",
+o:["écrit","écrites","écrite","écrits"],a:1,e:"Le COD « les lettres » est placé avant l'auxiliaire : le participe passé s'accorde avec lui."
+},
+
+{
+c:"Accords / participe passé",
+q:"Ils se sont ___ toute la soirée.",
+o:["parlé","parlés","parlées","parlée"],a:0,e:"« Se parler » se construit avec un COI : pas d'accord du participe passé."
+},
+
+{
+c:"Accords / participe passé",
+q:"Elles se sont ___ les mains.",
+o:["lavé","lavées","lavés","lavée"],a:0,e:"Le COD « les mains » est placé après le verbe ; « se » est COI : pas d'accord."
+},
+
+{
+c:"Accords / participe passé",
+q:"Les chansons qu'ils ont ___ étaient magnifiques.",
+o:["chanté","chantées","chantés","chantée"],a:1,e:"« Les chansons » est COD placé avant : « chantées »."
+},
+
+{
+c:"Accords / participe passé",
+q:"La décision qu'il a ___ était difficile.",
+o:["prise","pris","prises","prendre"],a:0,e:"Le COD féminin singulier « la décision » entraîne « prise »."
+},
+
+{
+c:"Accords / participe passé",
+q:"Les enfants sont ___ tôt.",
+o:["parti","partis","parties","partir"],a:1,e:"Avec « être », le participe passé s'accorde avec le sujet masculin pluriel."
+},
+
+{
+c:"Accords / participe passé",
+q:"Marie est ___ avant midi.",
+o:["arrivé","arrivée","arrivées","arriver"],a:1,e:"Sujet féminin singulier : « arrivée »."
+},
+
+{
+c:"Accords / participe passé",
+q:"Les erreurs qu'il a ___ ont été corrigées.",
+o:["commis","commises","commise","commet"],a:1,e:"« Les erreurs » est COD placé avant : « commises »."
+},
+
+{
+c:"Accords / participe passé",
+q:"Les fleurs qu'elle a ___ sont magnifiques.",
+o:["cueilli","cueillies","cueillie","cueillis"],a:1,e:"« Les fleurs » est COD féminin pluriel placé avant."
+},
+
+{
+c:"Accords / participe passé",
+q:"Ils se sont ___ au téléphone.",
+o:["parlés","parlé","parlées","parlée"],a:1,e:"« Se » est COI avec « parler à quelqu'un » : pas d'accord."
+},
+
+{
+c:"Accords / participe passé",
+q:"Les exercices que nous avons ___ étaient difficiles.",
+o:["fait","faits","faite","faites"],a:1,e:"Le COD masculin pluriel « les exercices » est placé avant."
+},
+
+{
+c:"Accords / participe passé",
+q:"Quelle phrase est correcte ?",
+o:[
+"Les portes sont fermé.",
+"Les portes sont fermées.",
+"Les portes sont fermés.",
+"Les portes sont fermer."
+],a:1,e:"Avec « être », « portes » féminin pluriel entraîne « fermées »."
+},
+
+/* ================= NATURE ET FONCTION 63-70 ================= */
+
+{
+c:"Nature et fonction",
+q:"Dans « Le vieux livre est précieux », quelle est la nature de « vieux » ?",
+o:["Nom","Adjectif qualificatif","Adverbe","Pronom"],a:1,e:"« Vieux » qualifie le nom « livre » : adjectif qualificatif."
+},
+
+{
+c:"Nature et fonction",
+q:"Dans la même phrase, « vieux » a pour fonction :",
+o:["COD","Épithète","COI","Sujet"],a:1,e:"Il qualifie directement le nom « livre » : épithète."
+},
+
+{
+c:"Nature et fonction",
+q:"Dans « Elle lit rapidement », « rapidement » est :",
+o:["Nom","Adjectif","Adverbe","Déterminant"],a:2,e:"Le mot « rapidement » modifie le verbe « lit » : c'est un adverbe."
+},
+
+{
+c:"Nature et fonction",
+q:"Dans « Je pense à mon avenir », « à mon avenir » est :",
+o:["COD","COI","Sujet","Attribut"],a:1,e:"Le complément est introduit par « à » : COI."
+},
+
+{
+c:"Nature et fonction",
+q:"Dans « Celui-ci est intéressant », « celui-ci » est :",
+o:["Pronom démonstratif","Déterminant démonstratif","Adjectif","Adverbe"],a:0,e:"« Celui-ci » remplace un nom : pronom démonstratif."
+},
+
+{
+c:"Nature et fonction",
+q:"Dans « La fille qui lit est ma sœur », « qui lit » est :",
+o:["Proposition principale","Proposition subordonnée relative","Proposition indépendante","Groupe infinitif"],a:1,e:"« Qui lit » est introduit par le pronom relatif « qui »."
+},
+
+{
+c:"Nature et fonction",
+q:"Dans « Nous avons retrouvé le vieux manuscrit », « le » est :",
+o:["Pronom","Déterminant défini","Adverbe","Conjonction"],a:1,e:"« Le » accompagne le nom « manuscrit » : déterminant défini."
+},
+
+{
+c:"Nature et fonction",
+q:"Dans « Il semble fatigué », « fatigué » est :",
+o:["COD","Attribut du sujet","COI","Épithète"],a:1,e:"« Semble » est un verbe d'état ; « fatigué » est attribut du sujet."
+},
+
+/* ================= VOCABULAIRE 71-76 ================= */
+
+{
+c:"Vocabulaire",
+q:"Un « patrimoine » désigne principalement :",
+o:["Uniquement une richesse financière","Un ensemble de biens et éléments hérités du passé","Une maladie","Une opinion"],
+a:1,e:"Le patrimoine comprend notamment des biens culturels, historiques ou matériels transmis."
+},
+
+{
+c:"Vocabulaire",
+q:"Quel est le synonyme le plus proche de « préserver » ?",
+o:["Détruire","Conserver","Oublier","Modifier"],a:1,e:"Préserver signifie protéger ou conserver."
+},
+
+{
+c:"Vocabulaire",
+q:"Quel est l'antonyme de « éphémère » ?",
+o:["Durable","Fragile","Rapide","Passager"],a:0,e:"Éphémère signifie qui dure peu ; son contraire est durable."
+},
+
+{
+c:"Vocabulaire",
+q:"« Remettre en question une opinion » signifie :",
+o:["La répéter","La considérer comme définitive","La réexaminer de manière critique","La cacher"],a:2,e:"Remettre en question signifie examiner à nouveau avec esprit critique."
+},
+
+{
+c:"Vocabulaire",
+q:"Le mot « lucidité » désigne :",
+o:["Une vision claire et réaliste","Une grande colère","Une peur excessive","Une absence de réflexion"],a:0,e:"La lucidité correspond à une perception claire et réaliste."
+},
+
+{
+c:"Vocabulaire",
+q:"Quel mot est de la même famille que « mémoire » ?",
+o:["Mémorable","Merveille","Mesure","Membre"],a:0,e:"« Mémorable » appartient à la famille de « mémoire »."
+},
+
+/* ================= PRONOMS RELATIFS 77-82 ================= */
+
+{
+c:"Pronoms relatifs",
+q:"Le livre ___ je parle est ancien.",
+o:["qui","que","dont","où"],a:2,e:"« Parler de quelque chose » : on utilise « dont »."
+},
+
+{
+c:"Pronoms relatifs",
+q:"La personne ___ vient est ma sœur.",
+o:["que","dont","qui","où"],a:2,e:"« Qui » est sujet du verbe « vient »."
+},
+
+{
+c:"Pronoms relatifs",
+q:"Le film ___ nous avons regardé était intéressant.",
+o:["qui","que","dont","où"],a:1,e:"« Nous avons regardé quoi ? » Le film est COD : « que »."
+},
+
+{
+c:"Pronoms relatifs",
+q:"La ville ___ je suis né a beaucoup changé.",
+o:["qui","que","dont","où"],a:3,e:"« Où » s'emploie pour un lieu."
+},
+
+{
+c:"Pronoms relatifs",
+q:"L'auteur ___ le roman a été récompensé est célèbre.",
+o:["qui","dont","que","où"],a:1,e:"« Le roman de l'auteur » : on emploie « dont »."
+},
+
+{
+c:"Pronoms relatifs",
+q:"Voici la raison pour ___ il est parti.",
+o:["laquelle","qui","que","dont"],a:0,e:"Après « pour », on utilise ici le pronom relatif composé « laquelle »."
+},
+
+/* ================= DISCOURS DIRECT / INDIRECT 83-87 ================= */
+
+{
+c:"Discours direct/indirect",
+q:"Il dit : « Je suis fatigué. » Au discours indirect :",
+o:[
+"Il dit qu'il est fatigué.",
+"Il dit qu'il était fatigué hier.",
+"Il disait qu'il sera fatigué.",
+"Il dit que je suis fatigué."
+],a:0,e:"Au présent introducteur « il dit », le présent peut être conservé : « qu'il est fatigué »."
+},
+
+{
+c:"Discours direct/indirect",
+q:"Elle a dit : « Je viendrai demain. » Au discours indirect :",
+o:[
+"Elle a dit qu'elle viendra demain.",
+"Elle a dit qu'elle viendrait le lendemain.",
+"Elle dit qu'elle viendrait demain.",
+"Elle a dit qu'elle venait hier."
+],a:1,e:"Avec un verbe introducteur au passé, le futur devient conditionnel et « demain » devient « le lendemain »."
+},
+
+{
+c:"Discours direct/indirect",
+q:"Paul demanda : « Où habites-tu ? » Au discours indirect :",
+o:[
+"Paul demanda où j'habitais.",
+"Paul demanda où habites-tu.",
+"Paul demanda que j'habite où.",
+"Paul demanda si où j'habite."
+],a:0,e:"La question directe devient une interrogative indirecte : « où j'habitais »."
+},
+
+{
+c:"Discours direct/indirect",
+q:"Il ordonna : « Fermez la porte ! » Au discours indirect :",
+o:[
+"Il ordonna que nous fermions la porte.",
+"Il ordonna que nous fermons la porte.",
+"Il ordonna de fermerons la porte.",
+"Il ordonna que nous avons fermé la porte."
+],a:0,e:"Après « ordonner que », le subjonctif est utilisé."
+},
+
+{
+c:"Discours direct/indirect",
+q:"Elle affirme : « Je connais la vérité. » Au discours indirect :",
+o:[
+"Elle affirme qu'elle connaît la vérité.",
+"Elle affirme qu'elle connaissait la vérité hier.",
+"Elle affirme que je connais la vérité.",
+"Elle affirme qu'elle connaîtra la vérité."
+],a:0,e:"Le verbe introducteur est au présent : le présent est conservé."
+},
+
+/* ================= VOIX ACTIVE / PASSIVE 88-91 ================= */
+
+{
+c:"Voix active/passive",
+q:"« Les élèves lisent le texte. » À la voix passive :",
+o:[
+"Le texte est lu par les élèves.",
+"Le texte lit les élèves.",
+"Le texte a lu par les élèves.",
+"Les élèves sont lus par le texte."
+],a:0,e:"Le COD de la phrase active devient sujet à la voix passive."
+},
+
+{
+c:"Voix active/passive",
+q:"« Le professeur corrigera les copies. » À la voix passive :",
+o:[
+"Les copies seront corrigées par le professeur.",
+"Les copies sont corrigées par le professeur.",
+"Les copies seraient corrigées par le professeur.",
+"Les copies ont été corrigées par le professeur."
+],a:0,e:"Le futur simple devient futur antérieur passif ? Non : futur passif = « seront corrigées »."
+},
+
+{
+c:"Voix active/passive",
+q:"« La décision a été prise par le comité. » À la voix active :",
+o:[
+"Le comité a pris la décision.",
+"Le comité prend la décision.",
+"Le comité prendra la décision.",
+"La décision a pris le comité."
+],a:0,e:"Le complément d'agent « par le comité » devient sujet."
+},
+
+{
+c:"Voix active/passive",
+q:"Quelle phrase est à la voix passive ?",
+o:[
+"Les enfants jouent.",
+"Le livre est lu par Marie.",
+"Marie lit le livre.",
+"Marie choisit un livre."
+],a:1,e:"« Le livre est lu par Marie » est construite avec être + participe passé + complément d'agent."
+},
+
+/* ================= FIGURES DE STYLE 92-96 ================= */
+
+{
+c:"Figures de style",
+q:"« Cette ville ne dort jamais » est principalement :",
+o:["Une personnification","Une comparaison","Une litote","Une anaphore"],a:0,e:"On attribue à la ville une caractéristique humaine : dormir."
+},
+
+{
+c:"Figures de style",
+q:"« Je meurs de faim » est une :",
+o:["Hyperbole","Litote","Comparaison","Antithèse"],a:0,e:"Il s'agit d'une exagération destinée à renforcer l'expression."
+},
+
+{
+c:"Figures de style",
+q:"« Cette obscure clarté » constitue un :",
+o:["Oxymore","Pléonasme","Euphémisme","Chiasme"],a:0,e:"Deux termes apparemment contradictoires sont associés : obscure/clarté."
+},
+
+{
+c:"Figures de style",
+q:"« Il est fort comme un lion » est une :",
+o:["Métaphore","Comparaison","Métonymie","Personnification"],a:1,e:"La présence de « comme » caractérise la comparaison."
+},
+
+{
+c:"Figures de style",
+q:"« Paris s'est réveillé ce matin » est une :",
+o:["Personnification","Hyperbole","Gradation","Litote"],a:0,e:"La ville reçoit une action humaine : se réveiller."
+},
+
+/* ================= ORTHOGRAPHE 97-98 ================= */
+
+{
+c:"Orthographe",
+q:"Quelle phrase est correctement écrite ?",
+o:[
+"Les informations que j'ai reçu sont importantes.",
+"Les informations que j'ai reçues sont importantes.",
+"Les informations que j'ai reçus sont importantes.",
+"Les informations que j'ai recevoir sont importantes."
+],a:1,e:"« Les informations » est COD féminin pluriel placé avant « ai reçu » : « reçues »."
+},
+
+{
+c:"Orthographe",
+q:"Quelle phrase est correcte ?",
+o:[
+"Quelque soit ton choix, je viendrai.",
+"Quel que soit ton choix, je viendrai.",
+"Quelques soit ton choix, je viendrai.",
+"Quelque sois ton choix, je viendrai."
+],a:1,e:"La locution correcte est « quel que soit »."
+},
+
+/* ================= TYPES / FORMES 99 ================= */
+
+{
+c:"Types et formes de phrases",
+q:"« N'oublie pas ton livre ! » est une phrase :",
+o:["Déclarative","Interrogative","Impérative","Exclamative uniquement"],a:2,e:"Le verbe est employé à l'impératif dans une phrase injonctive."
+},
+
+/* ================= LITTÉRATURE / EXPRESSION 100 ================= */
+
+{
+c:"Littérature / expression écrite",
+q:"Dans une dissertation, quelle organisation est généralement la plus appropriée ?",
+o:[
+"Une introduction, un développement organisé et une conclusion",
+"Une conclusion uniquement",
+"Une liste d'idées sans organisation",
+"Un seul paragraphe sans transition"
+],a:0,e:"Une dissertation structurée comporte normalement une introduction, un développement organisé et une conclusion."
+}
+
+];
+
+
+/* =========================================================
+   VÉRIFICATION AUTOMATIQUE
+========================================================= */
+
+if(Q.length !== 100){
+ throw new Error(
+  "ERREUR : le test doit contenir exactement 100 questions. Nombre trouvé : "
+  + Q.length
+ );
+}
+
+Q.forEach((item,i)=>{
+ if(!item.q || !Array.isArray(item.o) || item.o.length !== 4){
+  throw new Error("ERREUR dans la question "+(i+1));
+ }
+
+ if(!Number.isInteger(item.a) || item.a < 0 || item.a > 3){
+  throw new Error(
+   "ERREUR : réponse correcte invalide à la question "+(i+1)
+  );
+ }
+});
+
+const chapterCount={};
+
+Q.forEach(q=>{
+ chapterCount[q.c]=(chapterCount[q.c]||0)+1;
+});
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+let candidate="";
+let qIndex=0;
+let selected=null;
+let answers=Array(100).fill(null);
+let currentChoices=[];
+let questionInterval=null;
+let readingInterval=null;
+let globalInterval=null;
+let startTime=0;
+let finished=false;
+let readingSeconds=900;
+
+
+/* =========================================================
+   OUTILS
+========================================================= */
+
+function formatTime(sec){
+ sec=Math.max(0,Math.floor(sec));
+
+ const h=Math.floor(sec/3600);
+ const m=Math.floor((sec%3600)/60);
+ const s=sec%60;
+
+ return String(h).padStart(2,"0")+":"+
+        String(m).padStart(2,"0")+":"+
+        String(s).padStart(2,"0");
+}
+
+
+function shuffle(arr){
+ const a=[...arr];
+
+ for(let i=a.length-1;i>0;i--){
+  const j=Math.floor(Math.random()*(i+1));
+  [a[i],a[j]]=[a[j],a[i]];
+ }
+
+ return a;
+}
+
+
+/* =========================================================
+   DÉMARRAGE
+========================================================= */
+
+function startTest(){
+
+ candidate=document.getElementById("candidateName").value.trim();
+
+ if(!candidate){
+  alert("Entre ton nom complet avant de commencer.");
+  return;
+ }
+
+ document.getElementById("home").classList.add("hidden");
+
+ startTime=Date.now();
+
+ startGlobalTimer();
+
+ qIndex=0;
+
+ /*
+  Premier chapitre :
+  compréhension du texte.
+ */
+ showReading();
+
+}
+
+
+/* =========================================================
+   TIMER GLOBAL
+========================================================= */
+
+function startGlobalTimer(){
+
+ clearInterval(globalInterval);
+
+ globalInterval=setInterval(()=>{
+
+  if(finished)return;
+
+  const elapsed=(Date.now()-startTime)/1000;
+
+  document.getElementById("globalTimer").textContent=
+   formatTime(elapsed);
+
+ },1000);
+}
+
+
+/* =========================================================
+   PHASE DE LECTURE
+========================================================= */
+
+function showReading(){
+
+ clearInterval(questionInterval);
+ clearInterval(readingInterval);
+
+ readingSeconds=900;
+
+ document.getElementById("quizScreen").classList.add("hidden");
+ document.getElementById("readingScreen").classList.remove("hidden");
+
+ document.getElementById("readingTitle").textContent=
+  readingTitle;
+
+ document.getElementById("readingText").innerHTML=
+  readingText;
+
+ updateReadingTimer();
+
+ readingInterval=setInterval(()=>{
+
+  readingSeconds--;
+
+  updateReadingTimer();
+
+  if(readingSeconds<=0){
+   clearInterval(readingInterval);
+   continueReading();
+  }
+
+ },1000);
+}
+
+
+function updateReadingTimer(){
+
+ const min=Math.floor(readingSeconds/60);
+ const sec=readingSeconds%60;
+
+ document.getElementById("readingTimer").textContent=
+  String(min).padStart(2,"0")+":"+
+  String(sec).padStart(2,"0");
+}
+
+
+function skipReading(){
+
+ clearInterval(readingInterval);
+
+ document.getElementById("readingScreen")
+ .classList.add("hidden");
+
+ document.getElementById("quizScreen")
+ .classList.remove("hidden");
+
+ renderQuestion();
+}
+
+
+function continueReading(){
+ skipReading();
+}
+
+
+/* =========================================================
+   AFFICHAGE QUESTION
+========================================================= */
+
+function renderQuestion(){
+
+ clearInterval(questionInterval);
+
+ selected=answers[qIndex];
+
+ const item=Q[qIndex];
+
+ document.getElementById("questionNumber").textContent=
+  "Question "+(qIndex+1)+" / 100";
+
+ document.getElementById("questionText").textContent=
+  item.q;
+
+ document.getElementById("sectionBadge").textContent=
+  item.c;
+
+ document.getElementById("progressBar").style.width=
+  ((qIndex+1)/100*100)+"%";
+
+ const options=document.getElementById("options");
+
+ options.innerHTML="";
+
+ currentChoices=shuffle(
+  item.o.map((text,index)=>({
+   text:text,
+   original:index
+  }))
+ );
+
+ currentChoices.forEach((choice,index)=>{
+
+  const button=document.createElement("button");
+
+  button.className="option";
+
+  button.innerHTML=
+   "<strong>"+String.fromCharCode(65+index)+".</strong> "+
+   choice.text;
+
+  if(selected!==null &&
+     choice.original===selected.original){
+   button.classList.add("selected");
+  }
+
+  button.onclick=()=>{
+   selectAnswer(index);
+  };
+
+  options.appendChild(button);
+ });
+
+ /*
+  Le bouton "revoir le texte" reste disponible
+  uniquement pour les questions de compréhension.
+ */
+ const textButton=document.getElementById("textButton");
+
+ if(qIndex<20){
+  textButton.classList.remove("hidden");
+ }else{
+  textButton.classList.add("hidden");
+ }
+
+ let remaining=60;
+
+ document.getElementById("questionTimer").textContent="01:00";
+
+ questionInterval=setInterval(()=>{
+
+  remaining--;
+
+  document.getElementById("questionTimer").textContent=
+   "00:"+String(remaining).padStart(2,"0");
+
+  if(remaining<=0){
+
+   clearInterval(questionInterval);
+
+   if(answers[qIndex]===null){
+    answers[qIndex]=null;
+   }
+
+   nextQuestion();
+  }
+
+ },1000);
+}
+
+
+/* =========================================================
+   RÉPONSE
+========================================================= */
+
+function selectAnswer(index){
+
+ selected=currentChoices[index];
+
+ answers[qIndex]=selected;
+
+ const buttons=document.querySelectorAll(".option");
+
+ buttons.forEach((btn,i)=>{
+  btn.classList.toggle("selected",i===index);
+ });
+}
+
+
+/* =========================================================
+   QUESTION SUIVANTE
+========================================================= */
+
+function nextQuestion(){
+
+ clearInterval(questionInterval);
+
+ if(qIndex<99){
+
+  qIndex++;
+
+  /*
+   Une seule phase de lecture, au début.
+  */
+  renderQuestion();
+
+ }else{
+
+  finishTest();
+ }
+}
+
+
+/* =========================================================
+   REVOIR LE TEXTE
+========================================================= */
+
+function openReading(){
+
+ document.getElementById("modalText").innerHTML=
+  readingText;
+
+ document.getElementById("readingModal")
+ .classList.remove("hidden");
+}
+
+
+function closeReading(){
+
+ document.getElementById("readingModal")
+ .classList.add("hidden");
+}
+
+
+/* =========================================================
+   RÉSULTATS
+========================================================= */
+
+function finishTest(){
+
+ finished=true;
+
+ clearInterval(questionInterval);
+ clearInterval(readingInterval);
+ clearInterval(globalInterval);
+
+ document.getElementById("quizScreen").classList.add("hidden");
+
+ document.getElementById("resultScreen")
+ .classList.remove("hidden");
+
+ calculateResults();
+
+ window.scrollTo({
+  top:0,
+  behavior:"smooth"
+ });
+}
+
+
+function calculateResults(){
+
+ let good=0;
+ let bad=0;
+ let empty=0;
+
+ const chapters={};
+
+ Q.forEach((item,i)=>{
+
+  if(!chapters[item.c]){
+   chapters[item.c]={
+    total:0,
+    good:0
+   };
+  }
+
+  chapters[item.c].total++;
+
+  if(answers[i]===null){
+   empty++;
+   return;
+  }
+
+  if(answers[i].original===item.a){
+   good++;
+   chapters[item.c].good++;
+  }else{
+   bad++;
+  }
+ });
+
+ const percent=good+"%";
+
+ document.getElementById("resultTitle").textContent=
+  "Résultats de "+candidate;
+
+ document.getElementById("resultScore").textContent=
+  good+" / 100";
+
+ document.getElementById("goodCount").textContent=
+  good;
+
+ document.getElementById("badCount").textContent=
+  bad;
+
+ document.getElementById("emptyCount").textContent=
+  empty;
+
+ document.getElementById("percent").textContent=
+  percent;
+
+ const elapsed=Math.floor((Date.now()-startTime)/1000);
+
+ document.getElementById("resultTime").textContent=
+  "Temps réel utilisé : "+formatTime(elapsed);
+
+ const chapterBox=document.getElementById("chapterResults");
+
+ chapterBox.innerHTML="";
+
+ Object.keys(chapters).forEach(chapter=>{
+
+  const data=chapters[chapter];
+
+  const div=document.createElement("div");
+
+  div.className="result-box";
+
+  div.style.marginBottom="10px";
+
+  div.innerHTML=
+   "<strong>"+chapter+"</strong><br>"+
+   data.good+" / "+data.total;
+
+  chapterBox.appendChild(div);
+ });
+
+ showErrors();
+}
+
+
+/* =========================================================
+   CORRECTION
+========================================================= */
+
+function showErrors(){
+
+ const box=document.getElementById("errors");
+
+ box.innerHTML="";
+
+ let errors=0;
+
+ Q.forEach((item,i)=>{
+
+  const userAnswer=answers[i];
+
+  if(userAnswer!==null &&
+     userAnswer.original===item.a){
+   return;
+  }
+
+  errors++;
+
+  const div=document.createElement("div");
+
+  div.className="error";
+
+  let userText="Aucune réponse";
+
+  if(userAnswer!==null){
+   userText=userAnswer.text;
+  }
+
+  div.innerHTML=
+   "<strong>Question "+(i+1)+" — "+item.c+"</strong>"+
+   "<div>"+item.q+"</div>"+
+   "<p><b>Ta réponse :</b> "+userText+"</p>"+
+   "<p><b>Bonne réponse :</b> "+
+   item.o[item.a]+"</p>"+
+   "<div class='explanation'><b>Explication :</b> "+
+   item.e+"</div>";
+
+  box.appendChild(div);
+ });
+
+ if(errors===0){
+
+  box.innerHTML=
+   "<div style='padding:20px;background:#ecfdf5;border-radius:12px;color:#047857;font-weight:bold'>"+
+   "🎉 Excellent ! Aucune erreur."+
+   "</div>";
+ }
+}
+
+
+/* =========================================================
+   PROTECTION SIMPLE
+========================================================= */
+
+document.addEventListener("visibilitychange",()=>{
+
+ if(
+  document.hidden &&
+  startTime &&
+  !finished
+ ){
+
+  console.warn("Tentative de changement d'onglet détectée.");
+ }
+});
+
+
+window.addEventListener("beforeunload",(e)=>{
+
+ if(startTime && !finished){
+
+  e.preventDefault();
+  e.returnValue="";
+ }
+});
+
+
+/* =========================================================
+   MESSAGE DE VÉRIFICATION
+========================================================= */
+
+console.log(
+ "TEST FRANÇAIS chargé correctement : "+
+ Q.length+
+ " questions."
+);
+
+console.log("Répartition des chapitres :",chapterCount);
+
+</script>
+
+</body>
+  </html>
